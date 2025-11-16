@@ -48,12 +48,13 @@ export const StudyBotChat = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isThinking]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isSending) return;
+  const handleSend = async (messageToSend?: string) => {
+    const currentMessage = messageToSend || input;
+    if (!currentMessage.trim() || isSending) return;
 
     setIsSending(true);
 
-    const userMessage = input;
+    const userMessage = currentMessage;
     const userMsg: Message = {
       text: userMessage,
       isBot: false,
@@ -214,10 +215,7 @@ export const StudyBotChat = () => {
                       variant="outline"
                       className="h-full p-6 glass-button rounded-2xl flex flex-col items-center justify-center gap-4 text-center group animate-fade-in-up"
                       style={{ animationDelay: `${0.3 + i * 0.15}s` }}
-                      onClick={() => {
-                        setInput(reply.text);
-                        setTimeout(() => handleSend(), 0);
-                      }}
+                      onClick={() => handleSend(reply.text)}
                     >
                       <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-white/15 group-hover:bg-white/25 transition-all duration-300">
                         <div className="text-blue-600 group-hover:text-blue-700 transition-colors duration-300 transform group-hover:scale-110">
@@ -307,7 +305,7 @@ export const StudyBotChat = () => {
               <div className="absolute right-2">
                 <Button
                   size="icon"
-                  onClick={handleSend}
+                  onClick={() => handleSend()}
                   disabled={!input.trim() || isSending}
                   className="w-11 h-11 rounded-full btn-gradient disabled:opacity-50 disabled:transform-none disabled:shadow-none transition-all duration-300"
                 >
