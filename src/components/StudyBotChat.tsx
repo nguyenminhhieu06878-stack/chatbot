@@ -48,20 +48,21 @@ export const StudyBotChat = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isThinking]);
 
-  const handleSend = async (messageToSend?: string) => {
-    const message = messageToSend || input;
-    if (!message.trim() || isSending) return;
-
-    // Clear input immediately if the message is from the input field
-    if (!messageToSend) {
+  const submitManualInput = () => {
+    const message = input.trim();
+    if (message) {
+      handleSend(message);
       setInput("");
     }
+  };
+
+  const handleSend = async (message: string) => {
+    if (!message.trim() || isSending) return;
 
     setIsSending(true);
 
-    const userMessage = message;
     const userMsg: Message = {
-      text: userMessage,
+      text: message,
       isBot: false,
       timestamp: new Date()
     };
@@ -120,7 +121,7 @@ export const StudyBotChat = () => {
               ...conversationHistory,
               {
                 role: 'user',
-                content: userMessage
+                content: message
               }
             ],
             temperature: 0.7,
@@ -301,7 +302,7 @@ export const StudyBotChat = () => {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    handleSend();
+                    submitManualInput();
                   }
                 }}
                 className="h-14 pl-14 pr-16 w-full rounded-full bg-transparent border-none focus-visible:ring-0 text-base text-gray-800 placeholder:text-gray-500 placeholder:font-medium transition-all duration-300"
@@ -309,7 +310,7 @@ export const StudyBotChat = () => {
               <div className="absolute right-2">
                 <Button
                   size="icon"
-                  onClick={() => handleSend()}
+                  onClick={submitManualInput}
                   disabled={!input.trim() || isSending}
                   className="w-11 h-11 rounded-full btn-gradient disabled:opacity-50 disabled:transform-none disabled:shadow-none transition-all duration-300"
                 >
