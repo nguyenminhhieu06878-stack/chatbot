@@ -53,6 +53,8 @@ export const StudyBotChat = () => {
     if (!currentMessage.trim() || isSending) return;
 
     setIsSending(true);
+    // Clear input immediately
+    setInput("");
 
     const userMessage = currentMessage;
     const userMsg: Message = {
@@ -62,7 +64,6 @@ export const StudyBotChat = () => {
     };
 
     setMessages(prev => [...prev, userMsg]);
-    setInput("");
     setIsThinking(true);
 
     try {
