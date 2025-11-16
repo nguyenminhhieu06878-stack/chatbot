@@ -48,18 +48,8 @@ export const StudyBotChat = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isThinking]);
 
-  const submitMessage = (text?: string) => {
-    const message = text || input;
-    const isManualEntry = !text;
-    handleSend(message, isManualEntry);
-  };
-
-  const handleSend = async (message: string, clearInput: boolean) => {
+  const handleSend = async (message: string) => {
     if (!message.trim() || isSending) return;
-
-    if (clearInput) {
-      setInput("");
-    }
 
     setIsSending(true);
 
@@ -186,6 +176,15 @@ export const StudyBotChat = () => {
     { icon: <GraduationCap size={24} />, text: "Tư vấn thi khối D01" },
   ];
 
+
+  const submitMessage = () => {
+    const message = input.trim();
+    if (message) {
+      handleSend(message);
+      setInput("");
+    }
+  };
+
     return (
     <div className="flex flex-col h-screen relative bg-gradient-to-br from-gray-100 to-gray-200">
 
@@ -222,7 +221,7 @@ export const StudyBotChat = () => {
                       variant="outline"
                       className="h-full p-6 glass-button rounded-2xl flex flex-col items-center justify-center gap-4 text-center group animate-fade-in-up"
                       style={{ animationDelay: `${0.3 + i * 0.15}s` }}
-                      onClick={() => submitMessage(reply.text)}
+                      onClick={() => handleSend(reply.text)}
                     >
                       <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-white/15 group-hover:bg-white/25 transition-all duration-300">
                         <div className="text-blue-600 group-hover:text-blue-700 transition-colors duration-300 transform group-hover:scale-110">
@@ -312,7 +311,7 @@ export const StudyBotChat = () => {
               <div className="absolute right-2">
                 <Button
                   size="icon"
-                  onClick={() => submitMessage()}
+                  onClick={submitMessage}
                   disabled={!input.trim() || isSending}
                   className="w-11 h-11 rounded-full btn-gradient disabled:opacity-50 disabled:transform-none disabled:shadow-none transition-all duration-300"
                 >
