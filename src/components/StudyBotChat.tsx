@@ -49,14 +49,17 @@ export const StudyBotChat = () => {
   }, [messages, isThinking]);
 
   const handleSend = async (messageToSend?: string) => {
-    const currentMessage = messageToSend || input;
-    if (!currentMessage.trim() || isSending) return;
+    const message = messageToSend || input;
+    if (!message.trim() || isSending) return;
+
+    // Clear input immediately if the message is from the input field
+    if (!messageToSend) {
+      setInput("");
+    }
 
     setIsSending(true);
-    // Clear input immediately
-    setInput("");
 
-    const userMessage = currentMessage;
+    const userMessage = message;
     const userMsg: Message = {
       text: userMessage,
       isBot: false,
