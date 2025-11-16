@@ -124,6 +124,27 @@ html, body, #root {
   }
 }
 
+/* New fade-in animation for landing page */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes liftUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-8px);
+  }
+}
+
 .animate-slide-in {
   animation: slideInFromBottom 0.3s ease-out;
 }
@@ -150,32 +171,67 @@ html, body, #root {
   animation: glow 2s ease-in-out infinite;
 }
 
-/* Glass morphism effect */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-lift-up {
+  animation: liftUp 0.3s ease-out forwards;
+}
+
+/* Glass morphism effect - Light pastel theme */
 .glass {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(240, 245, 255, 0.75) 100%);
+  border: 1px solid rgba(79, 134, 247, 0.2);
+  box-shadow: 0 8px 32px rgba(79, 134, 247, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+/* Enhanced glass effect for suggestion buttons */
+.glass-button {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(240, 240, 255, 0.85) 100%);
+  border: 1px solid rgba(79, 134, 247, 0.3);
+  box-shadow: 0 8px 32px rgba(79, 134, 247, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 255, 0.95) 100%);
+  border: 1px solid rgba(79, 134, 247, 0.5);
+  box-shadow: 0 12px 40px rgba(79, 134, 247, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  transform: translateY(-8px);
 }
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #4f86f7 0%, #8b5cf6 50%, #ec4899 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 30%, #9ca3af 70%, #6b7280 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: animated-gradient 3s ease infinite;
 }
 
 /* Enhanced button styles */
 .btn-gradient {
   background: linear-gradient(135deg, #4f86f7 0%, #8b5cf6 100%);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(79, 134, 247, 0.3);
 }
 
 .btn-gradient:hover {
   background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(79, 134, 247, 0.4);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(79, 134, 247, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.btn-gradient:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 10px rgba(79, 134, 247, 0.3);
 }
 
 /* Message bubble enhancements */
@@ -204,4 +260,25 @@ html, body, #root {
 
 .message-bubble:hover::before {
   opacity: 1;
+}
+
+/* Enhanced input bar - Light pastel theme */
+.enhanced-input {
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 250, 255, 0.85) 100%);
+  border: 2px solid rgba(79, 134, 247, 0.25);
+  box-shadow: 0 8px 32px rgba(79, 134, 247, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enhanced-input:focus-within {
+  border-color: rgba(79, 134, 247, 0.5);
+  box-shadow: 0 12px 40px rgba(79, 134, 247, 0.35), 0 0 0 1px rgba(79, 134, 247, 0.3) inset;
+  transform: translateY(-2px);
+}
+
+.enhanced-input::placeholder {
+  color: rgba(100, 116, 139, 0.6);
+  font-weight: 500;
 }

@@ -10,6 +10,17 @@
   }
 }
 
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+  background-size: 200% 200% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: animated-gradient 3s ease infinite !important;
+  font-weight: 700 !important;
+  color: transparent !important;
+}
+
 body::before {
   content: '';
   position: fixed;

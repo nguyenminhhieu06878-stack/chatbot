@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, Sparkles, Plus, Calculator, Headphones, GraduationCap, User } from "lucide-react";
 import BotAvatar from './BotAvatar';
-import ParticlesBackground from './ParticlesBackground';
+
 
 interface Message {
   text: string;
@@ -179,8 +179,7 @@ export const StudyBotChat = () => {
   ];
 
     return (
-    <div className="flex flex-col h-screen relative bg-transparent">
-      <ParticlesBackground />
+    <div className="flex flex-col h-screen relative bg-gradient-to-br from-gray-100 to-gray-200">
 
 
 
@@ -188,43 +187,49 @@ export const StudyBotChat = () => {
       <main className="flex-1 overflow-y-auto relative z-10">
         <div className="w-full max-w-4xl mx-auto p-4 space-y-8">
           {messages.length === 0 ? (
-            <div className="flex-1 flex flex-col justify-center items-center text-center min-h-[calc(100vh-140px)] relative z-10">
-              <div className="animate-fade-in-scale text-center">
-                <div className="mb-6">
-                  <Sparkles size={64} className="inline-block text-blue-400 animate-float" />
+            <div className="flex-1 flex flex-col justify-center items-center text-center min-h-[calc(100vh-120px)] px-4">
+              <div className="w-full max-w-4xl mx-auto">
+                <div
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: '0.1s' }}
+                >
+                  <div className="mb-8">
+                    <Sparkles size={64} className="inline-block text-blue-400 animate-float" />
+                  </div>
+                  <h1 className="text-7xl font-extrabold gradient-text mb-4 tracking-tight">
+                    Học Tốt Bot
+                  </h1>
+                  <h2 className="text-3xl font-bold text-black mb-6">
+                    Trợ lý học tập AI dành cho bạn
+                  </h2>
+                  <p className="text-lg text-black/80 mb-16 max-w-2xl mx-auto leading-relaxed">
+                    Từ giải đáp thắc mắc, tóm tắt kiến thức, đến tư vấn lộ trình học tập. Hãy hỏi tôi bất cứ điều gì!
+                  </p>
                 </div>
-                <h1 className="text-7xl font-extrabold gradient-text mb-4 tracking-tight">
-                  Học Tốt Bot
-                </h1>
-                <h2 className="text-3xl font-bold text-foreground/90 mb-6">
-                  Trợ lý học tập AI dành cho bạn
-                </h2>
-                <p className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto leading-relaxed">
-                  Từ giải đáp thắc mắc, tóm tắt kiến thức, đến tư vấn lộ trình học tập. Hãy hỏi tôi bất cứ điều gì!
-                </p>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
-                {quickReplies.map((reply, i) => (
-                  <Button
-                    key={i}
-                    variant="outline"
-                    className="h-auto p-6 glass border-white/20 hover:border-white/40 flex flex-col items-start text-left gap-3 rounded-xl group transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-fade-in-scale"
-                    style={{animationDelay: `${i * 0.1}s`}}
-                    onClick={() => {
-                      setInput(reply.text);
-                      setTimeout(() => handleSend(), 0);
-                    }}
-                  >
-                    <div className="text-blue-400 group-hover:text-blue-300 transition-colors duration-300 group-hover:scale-110 transform">
-                      {reply.icon}
-                    </div>
-                    <span className="text-base font-semibold text-foreground/90 group-hover:text-foreground transition-colors duration-300">
-                      {reply.text}
-                    </span>
-                    <div className="w-full h-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full group-hover:from-blue-500/40 group-hover:to-purple-500/40 transition-all duration-300"></div>
-                  </Button>
-                ))}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+                  {quickReplies.map((reply, i) => (
+                    <Button
+                      key={i}
+                      variant="outline"
+                      className="h-full p-6 glass-button rounded-2xl flex flex-col items-center justify-center gap-4 text-center group animate-fade-in-up"
+                      style={{ animationDelay: `${0.3 + i * 0.15}s` }}
+                      onClick={() => {
+                        setInput(reply.text);
+                        setTimeout(() => handleSend(), 0);
+                      }}
+                    >
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-white/15 group-hover:bg-white/25 transition-all duration-300">
+                        <div className="text-blue-600 group-hover:text-blue-700 transition-colors duration-300 transform group-hover:scale-110">
+                          {reply.icon}
+                        </div>
+                      </div>
+                      <span className="text-base font-bold text-gray-900 group-hover:text-black transition-colors duration-300">
+                        {reply.text}
+                      </span>
+                    </Button>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
@@ -235,11 +240,11 @@ export const StudyBotChat = () => {
                 )}
                 <div className={`max-w-[75%] rounded-2xl p-4 message-bubble shadow-lg ${
                   msg.isBot
-                    ? 'glass border border-white/10'
+                    ? 'glass border border-blue-200/30'
                     : 'btn-gradient text-white shadow-blue-500/25'
                 }`}>
                   {msg.isBot ? (
-                    <div className="prose prose-sm prose-invert max-w-none text-left prose-p:my-1 prose-ul:my-2 prose-ol:my-2 prose-li:my-1 prose-headings:my-3 prose-strong:text-blue-300 prose-em:text-purple-300">
+                    <div className="prose prose-sm max-w-none text-left prose-p:my-1 prose-ul:my-2 prose-ol:my-2 prose-li:my-1 prose-headings:my-3 prose-strong:text-blue-600 prose-em:text-purple-600 prose-p:text-gray-800 prose-headings:text-gray-900 prose-li:text-gray-800">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {msg.text}
                       </ReactMarkdown>
@@ -249,7 +254,7 @@ export const StudyBotChat = () => {
                   )}
 
                   {/* Message timestamp */}
-                  <div className={`text-xs mt-2 ${msg.isBot ? 'text-foreground/40' : 'text-white/60'}`}>
+                  <div className={`text-xs mt-2 ${msg.isBot ? 'text-gray-500' : 'text-white/60'}`}>
                     {msg.timestamp.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
@@ -266,12 +271,12 @@ export const StudyBotChat = () => {
           {isThinking && (
             <div className="flex items-start gap-4 justify-start animate-fade-in-scale">
               <BotAvatar />
-              <div className="max-w-[75%] rounded-2xl p-4 glass border border-white/10 flex items-center gap-3 shadow-lg">
-                <p className="text-sm text-foreground/80 font-medium">Học Tốt Bot đang suy nghĩ</p>
+              <div className="max-w-[75%] rounded-2xl p-4 glass border border-blue-200/30 flex items-center gap-3 shadow-lg">
+                <p className="text-sm text-gray-700 font-medium">Học Tốt Bot đang suy nghĩ</p>
                 <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0s'}}></div>
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0s'}}></div>
+                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                  <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
                 </div>
               </div>
             </div>
@@ -281,31 +286,35 @@ export const StudyBotChat = () => {
       </main>
 
       <div className="p-4 w-full sticky bottom-0 z-10">
-        <div className="relative w-full max-w-4xl mx-auto group">
-          <Input
-            placeholder="Hỏi Học Tốt Bot bất cứ điều gì về học tập..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                handleSend();
-              }
-            }}
-            className="h-14 pl-14 pr-16 w-full rounded-full glass border border-white/10 focus-visible:ring-2 focus-visible:ring-blue-400/80 shadow-lg text-base placeholder:text-foreground/50 transition-all duration-300"
-          />
-          <div className="absolute left-5 top-1/2 -translate-y-1/2 text-foreground/60 group-focus-within:text-blue-400 transition-colors duration-300">
-            <Plus size={22} />
-          </div>
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
-            <Button
-              size="icon"
-              onClick={handleSend}
-              disabled={!input.trim() || isSending}
-              className="w-10 h-10 rounded-full btn-gradient disabled:opacity-50 disabled:transform-none disabled:shadow-none transition-all duration-300 transform group-focus-within:scale-110"
-            >
-              <Send className="h-5 w-5 text-white" />
-            </Button>
+        <div className="relative w-full max-w-4xl mx-auto">
+          <div className="enhanced-input rounded-full p-1">
+            <div className="relative flex items-center">
+              <div className="absolute left-5 text-gray-500 group-focus-within:text-blue-500 transition-colors duration-300">
+                <Plus size={22} />
+              </div>
+              <Input
+                placeholder="Hỏi Học Tốt Bot bất cứ điều gì về học tập..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                  }
+                }}
+                className="h-14 pl-14 pr-16 w-full rounded-full bg-transparent border-none focus-visible:ring-0 text-base text-gray-800 placeholder:text-gray-500 placeholder:font-medium transition-all duration-300"
+              />
+              <div className="absolute right-2">
+                <Button
+                  size="icon"
+                  onClick={handleSend}
+                  disabled={!input.trim() || isSending}
+                  className="w-11 h-11 rounded-full btn-gradient disabled:opacity-50 disabled:transform-none disabled:shadow-none transition-all duration-300"
+                >
+                  <Send className="h-5 w-5 text-white" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
