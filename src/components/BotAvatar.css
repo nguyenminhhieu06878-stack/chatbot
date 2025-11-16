@@ -1,0 +1,131 @@
+.bot-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #8b5cf6, #4f46e5);
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.bot-head {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: lookAround 5s ease-in-out infinite;
+}
+
+.bot-face {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.bot-eyes {
+  position: absolute;
+  top: 18px; /* Move eyes down to make space for the hat */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bot-eye {
+  width: 8px; /* Make eye slightly larger */
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  animation: blink 4s ease-in-out infinite;
+}
+
+.pupil {
+    width: 4px;
+    height: 4px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bot-mouth {
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom: 2px solid white;
+  opacity: 0;
+  animation: smile 5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.graduation-cap {
+    position: absolute;
+    top: -5px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%) rotate(-10deg);
+    width: 32px;
+    height: 32px;
+}
+
+.cap-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 10px;
+    background-color: #333;
+    transform: skewX(-20deg);
+    border-radius: 2px;
+}
+
+.cap-body {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    width: 16px;
+    height: 6px;
+    background-color: #444;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.tassel {
+    position: absolute;
+    top: 2px;
+    right: -2px;
+    width: 2px;
+    height: 12px;
+    background-color: #f1c40f; /* Gold color */
+    transform-origin: top center;
+    animation: swingTassel 2.5s ease-in-out infinite;
+}
+
+@keyframes lookAround {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-5px); } /* Look left, faster */
+  30% { transform: translateX(5px); }  /* Look right, faster */
+  45%, 100% { transform: translateX(0); }    /* Look center */
+}
+
+@keyframes smile {
+  0%, 50% { opacity: 0; transform: scaleY(0.5) translateX(-50%); }
+  60% { opacity: 1; transform: scaleY(1.2) translateX(-50%); } /* Smile appears and grows */
+  80% { opacity: 1; transform: scaleY(1) translateX(-50%); }   /* Back to normal smile */
+  90%, 100% { opacity: 0; transform: scaleY(0.5) translateX(-50%); } /* Fade out */
+}
+
+@keyframes swingTassel {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(20deg); }
+}
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); } /* Blink */
+}
