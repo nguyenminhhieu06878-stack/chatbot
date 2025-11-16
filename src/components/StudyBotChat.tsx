@@ -65,7 +65,7 @@ export const StudyBotChat = () => {
     setIsThinking(true);
 
     try {
-      const systemPrompt = `Bạn là StudyBot, một gia sư AI chuyên sâu, thông thái và luôn chủ động.
+      const systemPrompt = `Bạn là Học Tốt Bot, một gia sư AI chuyên sâu, thông thái và luôn chủ động.
 
 ### NGUYÊN TẮC VÀNG (BẮT BUỘC TUÂN THỦ):
 
@@ -194,7 +194,7 @@ export const StudyBotChat = () => {
                   <Sparkles size={64} className="inline-block text-blue-400 animate-float" />
                 </div>
                 <h1 className="text-7xl font-extrabold gradient-text mb-4 tracking-tight">
-                  StudyBot
+                  Học Tốt Bot
                 </h1>
                 <h2 className="text-3xl font-bold text-foreground/90 mb-6">
                   Trợ lý học tập AI dành cho bạn
@@ -267,7 +267,7 @@ export const StudyBotChat = () => {
             <div className="flex items-start gap-4 justify-start animate-fade-in-scale">
               <BotAvatar />
               <div className="max-w-[75%] rounded-2xl p-4 glass border border-white/10 flex items-center gap-3 shadow-lg">
-                <p className="text-sm text-foreground/80 font-medium">StudyBot đang suy nghĩ</p>
+                <p className="text-sm text-foreground/80 font-medium">Học Tốt Bot đang suy nghĩ</p>
                 <div className="flex gap-1">
                   <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0s'}}></div>
                   <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
@@ -283,7 +283,7 @@ export const StudyBotChat = () => {
       <div className="p-4 w-full sticky bottom-0 z-10">
         <div className="relative w-full max-w-4xl mx-auto group">
           <Input
-            placeholder="Hỏi StudyBot bất cứ điều gì về học tập..."
+            placeholder="Hỏi Học Tốt Bot bất cứ điều gì về học tập..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {

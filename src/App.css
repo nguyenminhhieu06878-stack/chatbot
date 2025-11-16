@@ -12,53 +12,10 @@
 
 body::before {
   content: '';
-  position: fixed; /* Use fixed to ensure it covers the viewport */
+  position: fixed;
   inset: 0;
-  background: linear-gradient(
-    -45deg,
-    #4f86f7, /* Primary Blue */
-    #8b5cf6, /* Accent Purple */
-    #ec4899, /* Pink */
-    #3b82f6  /* A slightly different Blue */
-  );
-  background-size: 400% 400%;
-  animation: animated-gradient 10s ease infinite;
-  z-index: -1; /* Push it behind all content */
-  opacity: 0.3; /* Make it a bit more subtle */
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-body::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, rgba(79, 70, 229, 0) 70%);
-  animation: float 8s ease-in-out infinite;
-  z-index: 0;
-}
-
-/* You can add another pseudo-element for a second floating shape */
-#root::before {
-  content: '';
-  position: absolute;
-  bottom: 10%;
-  right: 10%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0) 70%);
-  animation: float 12s ease-in-out infinite reverse;
-  z-index: 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  z-index: -1;
 }
 
 #root {
