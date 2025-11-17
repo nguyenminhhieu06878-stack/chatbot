@@ -7,6 +7,8 @@ import { Send, Sparkles, Plus, Calculator, Headphones, GraduationCap, User } fro
 import BotAvatar from './BotAvatar';
 
 
+// Định nghĩa cấu trúc cho mỗi tin nhắn trong cuộc trò chuyện
+
 interface Message {
   text: string;
   isBot: boolean;
@@ -15,6 +17,10 @@ interface Message {
 }
 
 export const StudyBotChat = () => {
+
+  // --- STATE MANAGEMENT ---
+  // State để lưu trữ tất cả các tin nhắn. Dữ liệu được lấy từ localStorage khi khởi tạo.
+
   const [messages, setMessages] = useState<Message[]>(() => {
     try {
       const savedMessages = localStorage.getItem('studybot-messages');
@@ -39,17 +45,37 @@ export const StudyBotChat = () => {
     }
   }, [messages]);
 
+
+  // State cho nội dung của ô nhập liệu
+
   const [input, setInput] = useState("");
+  // State để hiển thị trạng thái "Bot đang suy nghĩ..."
+
     const [isThinking, setIsThinking] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  // State để vô hiệu hóa nút gửi, tránh gửi nhiều tin nhắn cùng lúc
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  // Ref để tham chiếu đến phần tử cuối cùng trong danh sách tin nhắn, giúp tự động cuộn xuống
+
+
+
+  // --- EFFECTS ---
+  // useEffect này sẽ tự động cuộn xuống tin nhắn mới nhất mỗi khi có tin nhắn mới hoặc bot đang suy nghĩ
 
     useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isThinking]);
 
+
+  // --- CORE LOGIC ---
+  // Hàm xử lý chính khi người dùng gửi một tin nhắn
+
   const handleSend = async (message: string) => {
     if (!message.trim() || isSending) return;
+
+    // 1. Tạo tin nhắn của người dùng và cập nhật giao diện ngay lập tức
+
 
     setIsSending(true);
 
@@ -58,6 +84,9 @@ export const StudyBotChat = () => {
       isBot: false,
       timestamp: new Date()
     };
+
+    // 2. Bắt đầu gọi API để lấy phản hồi từ Bot
+
 
     setMessages(prev => [...prev, userMsg]);
     setIsThinking(true);
@@ -86,6 +115,9 @@ export const StudyBotChat = () => {
 ### Hướng dẫn định dạng:
 *   Sử dụng Markdown (danh sách, **in đậm**, *in nghiêng*).
 *   Giọng văn: Thông thái, sư phạm, gần gũi và luôn khích lệ.`;
+
+
+      // 3. Gửi yêu cầu đến API, bao gồm cả prompt hệ thống và lịch sử trò chuyện
 
       // Prepare conversation history
       const conversationHistory = messages
@@ -124,6 +156,9 @@ export const StudyBotChat = () => {
 
       const data = await response.json();
 
+
+      // 4. Xử lý phản hồi và tạo hiệu ứng gõ chữ cho tin nhắn của bot
+
       if (!response.ok) {
         throw new Error(`API Error: ${response.status}`);
       }
@@ -149,6 +184,9 @@ export const StudyBotChat = () => {
             const withoutTyping = prev.filter(msg => !msg.isTyping);
             return [...withoutTyping, {
               text: currentText,
+
+      // 5. Xử lý nếu có lỗi xảy ra trong quá trình gọi API
+
               isBot: true,
               timestamp: new Date(),
               isTyping: !isLastChar
@@ -162,11 +200,17 @@ export const StudyBotChat = () => {
             setIsThinking(false);
       setIsSending(false);
       const errorMsg: Message = {
+
+  // Mảng chứa các câu trả lời nhanh để gợi ý cho người dùng
+
         text: 'Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau! 😊',
         isBot: true,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMsg]);
+
+      {/* --- GIAO DIỆN CHÍNH --- */}
+
     }
   };
 
@@ -175,6 +219,9 @@ export const StudyBotChat = () => {
     { icon: <Headphones size={24} />, text: "Yếu Listening tiếng Anh" },
     { icon: <GraduationCap size={24} />, text: "Tư vấn thi khối D01" },
   ];
+
+          {/* Phần 1: Màn hình chào mừng (chỉ hiển thị khi chưa có tin nhắn) */}
+
 
 
   const submitMessage = () => {
@@ -271,6 +318,8 @@ export const StudyBotChat = () => {
               </div>
             ))
           )}
+
+          {/* Phần 3: Hiển thị chỉ báo "Bot đang suy nghĩ..." */}
 
           {isThinking && (
             <div className="flex items-start gap-4 justify-start animate-fade-in-scale">
